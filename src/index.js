@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require("cors")
 const serverless = require('serverless-http')
 const axios = require('axios');
 const mime = require('mime');
@@ -12,6 +13,7 @@ const port = process.env.PORT || 3000;
 let lastProtoHost;
 
 app.use(morgan('tiny'));
+app.use(cors())
 
 const regex = /\s+(href|src)=['"](.*?)['"]/g;
 
@@ -22,6 +24,8 @@ const getMimeType = url => {
     if (mime.getType(url) === 'application/x-msdownload') return 'text/html';
     return mime.getType(url) || 'text/html'; // if there is no extension return as html
 };
+
+
 
 router.get('/', (req, res) => {
     const { url } = req.query; // get url parameter
@@ -82,6 +86,8 @@ router.get('/*', (req, res) => {
             res.end("Not Implemented")
         });
 });
+
+
 
 app.use('/.netlify/functions/index', router)
 
