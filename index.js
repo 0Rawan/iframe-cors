@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const mime = require('mime');
 const morgan = require('morgan');
+const path = require('path');
 const { URL } = require('url');
 
 const app = express();
@@ -81,14 +82,14 @@ app.get('/api/*', (req, res) => {
         });
 });
 
-const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
-if (process.env.NODE_ENV === 'production') {
+
   app.use(express.static(path.join(__dirname, '/frontend/build')))
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend'/'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, '/frontend/build', 'index.html'))
   )
+
   
 app.listen(port, () => console.log(`Listening on port ${port}!`));
