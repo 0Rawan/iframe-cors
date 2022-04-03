@@ -1,11 +1,13 @@
 const express = require('express');
 const axios = require('axios');
+var cors = require('cors')
 const mime = require('mime');
 const morgan = require('morgan');
 const path = require('path');
 const { URL } = require('url');
 
 const app = express();
+app.use(cors())
 const port = process.env.PORT || 9000;
 
 let lastProtoHost;
