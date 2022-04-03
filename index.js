@@ -63,6 +63,12 @@ app.get('/api', (req, res) => {
     }
 });
 
+
+app.get('/api/port', (req, res) => {
+   
+        return res.end(port);
+    }
+
 app.get('/api/*', (req, res) => {
     if (!lastProtoHost) {
         console.log(url)
