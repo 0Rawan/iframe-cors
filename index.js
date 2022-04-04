@@ -7,7 +7,9 @@ const path = require('path');
 const { URL } = require('url');
 
 const app = express();
-app.use(cors())
+app.use(cors({
+    origin:"*"
+}))
 const port = process.env.PORT || 9000;
 
 let lastProtoHost;
