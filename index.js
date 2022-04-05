@@ -6,6 +6,7 @@ const { response } = require('express');
 
 
 app.use('/', function(clientRequest, clientResponse) {
+    console.log(clientRequest.originalUrl)
     var url;
     url = 'https://www.trendyol.com'
     var parsedHost = url.split('/').splice(2).splice(0, 1).join('/')
