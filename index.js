@@ -54,9 +54,6 @@ app.get('/', function(clientRequest, clientResponse) {
          
           clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
           clientResponse.type('text/html');
-          clientResponse.write('<!doctype html>');
-          clientResponse.write('<html lang="tr-TR">');
-          clientResponse.write('<h1>Hello, World!</h1>');
           clientResponse.end(body);
         }); 
       }   
