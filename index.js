@@ -1,63 +1,50 @@
-var express = require('express')
-var app = express()
-var https = require('https');
-var http = require('http');
-const { response } = require('express');
+const replace = require('absolutify')
+const express = require('express')
+const fs = require('fs');
+const puppeteer = require('puppeteer')
 
 
-app.use('/', function(clientRequest, clientResponse) {
-    console.log(clientRequest.originalUrl)
-    var url;
-    url = 'http://www.trendyol.com'
-    var parsedHost = url.split('/').splice(2).splice(0, 1).join('/')
-    var parsedPort;
-    var parsedSSL;
-    if (url.startsWith('https://')) {
-        parsedPort = 443
-        parsedSSL = https
-    } else if (url.startsWith('http://')) {
-        parsedPort = 80
-        parsedSSL = http
+const app = express()
+
+app.get('/', async (req, res) => {
+    const url = 'trendyol.com'
+    
+    if (!url) {
+        return res.send('Not url provided')
+    } else {
+        // generate puppeteer screenshot 
+        try {
+            // If headless Chrome is not launching on Debian, use the following line instead
+            // const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']})
+            const browser = await puppeteer.launch({
+            	headless: true,
+    		devtools: true,
+    		args: [
+        	'--disable-web-security',
+        	'--disable-features=IsolateOrigins',
+        	'--disable-site-isolation-trials'
+    		]
+	});
+           
+           
+            const page = await browser.newPage()
+            const cookies = JSON.parse(fs.readFileSync("cookies.json", 'utf-8'));
+	   for (const cookie of cookies) {
+  		await page.setCookie(cookie);
+		}
+            await page.goto(`https://${url}`)
+            
+            let document = await page.evaluate(() => document.documentElement.outerHTML)
+            document = replace(document, `/?url=${url.split('/')[0]}`)
+            
+            return res.send(document)
+        } catch(err) {
+            console.log(err)
+            
+            return res.send(err)
+        }
     }
-    var options = { 
-      hostname: parsedHost,
-      port: parsedPort,
-      path: clientRequest.url,
-      method: clientRequest.method,
-      headers: {
-        'User-Agent': clientRequest.headers['user-agent']
-      }
-    };  
-  
-    var serverRequest = parsedSSL.request(options, function(serverResponse) { 
-        console.log(serverResponse)
-      var body = '';   
-      //if(serverResponse){  
-      if (String(serverResponse.headers['content-type']).indexOf('text/html') !== -1) {
-        serverResponse.on('data', function(chunk) {
-          body += chunk;
-        }); 
-  
-        serverResponse.on('end', function() {
-          // Make changes to HTML files when they're done being read.
-          body = body.replace(`example`, `Cat!` );
-  
-          clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
-          clientResponse.end(body);
-        }); 
-      }   
-      else {
-        serverResponse.pipe(clientResponse, {
-          end: true
-        }); 
-        clientResponse.contentType(serverResponse.headers['content-type'])
-      }
-      //}
-    }); 
-  
-    serverRequest.end();
-  });    
+})
 
-  const port = process.env.PORT || 9000;  
-  app.listen(port)
- 
+
+app.listen(process.env.PORT | 3000)  

@@ -1,0 +1,292 @@
+[
+  {
+    "name": "_cfuvid",
+    "value": "AniWTKlzbUMqt4YJdNYhFqC2Lg8sWYdrVL1IyZzuaGY-1649194589596-0-604800000",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false
+  },
+  {
+    "name": "AbTesting",
+    "value": "3",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1806979350.826496,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "AbTestingCookies",
+    "value": "A_11-B_8-C_83-D_90-E_41-F_46-G_35-H_13-I_47-J_2-K_62-L_8-M_23-N_27-O_32",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1806979350.826563,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "platform",
+    "value": "web",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1806979350.8266,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "anonUserId",
+    "value": "74dd4420-b528-11ec-b691-e3995c3c0704",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1806979350.826632,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "__cflb",
+    "value": "0H28vSBxxmVRpbspxYA1XYcVBYMRWUg8PEbsX4oqwCp",
+    "domain": "www.trendyol.com",
+    "path": "/",
+    "expires": 1649277390.826662,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "__cfruid",
+    "value": "cc32ad2bd095ce0feadf8c47b7a9a4b7b91eef0f-1649194590",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true
+  },
+  {
+    "name": "storefrontId",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1711402601,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "countryCode",
+    "value": "TR",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1711402601,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "language",
+    "value": "tr",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1711402601,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "COOKIE_TY.IsUserAgentMobileOrTablet",
+    "value": "false",
+    "domain": "www.trendyol.com",
+    "path": "/",
+    "expires": 1649281002.009918,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "hvtb",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1712353002.01002,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "VisitCount",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1712353002.010078,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "SearchMode",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1649196402.010127,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "WebAbTesting",
+    "value": "A_75-B_56-C_8-D_80-E_47-F_24-G_88-H_23-I_31-J_70-K_63-L_27-M_88-N_7-O_8-P_29-Q_30-R_47-S_82-T_33-U_25-V_4-W_16-X_99-Y_33-Z_86",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1712353002.010175,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "COOKIE_CookieLawInformationPermission",
+    "value": "x=approved",
+    "domain": "www.trendyol.com",
+    "path": "/",
+    "expires": 1869946602,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "initialTrafficSource",
+    "value": "utmccn=(not set)",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1711402605,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "__utmzzses",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.1930510395.1649194605",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1656970605,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "userid",
+    "value": "undefined",
+    "domain": "www.trendyol.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.2.272319730.1649194606",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1712266609,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_gid",
+    "value": "GA1.2.721838703.1649194606",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1649281009,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_dc_gtm_UA-13174585-1",
+    "value": "1",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1649194666,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "sid",
+    "value": "awJ9n1xNTg",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1649196407.175105,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "pid",
+    "value": "UjfK38xDfl",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1711402607.17515,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ym_uid",
+    "value": "1649194608918787136",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1680730608,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "_ym_d",
+    "value": "1649194608",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1680730608,
+    "httpOnly": false,
+    "secure": true
+  },
+  {
+    "name": "cto_bundle",
+    "value": "bkEHaF9SY3JHczdKejlsOGl1N1d2aW50amVJVnJ4eFB5bFhZTjhZQXJBa1ppUXdZcjNJR3NuajFKcFJIbWozJTJCRnMxTlljUEprWDMwR1VSTkdhNnB0cmslMkJreXIxOEtXQXZVeXFONzhNcXpEaXBPWjRPVHdSYzJqWWRiekVaVFZ5MkcyMGpwQU8lMkJtTGU0S2FNTm15dTNUV0N0THclM0QlM0Q",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1683358608,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_ga_8F2NHTRF7T",
+    "value": "GS1.1.1649194605.1.0.1649194609.56",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1712266609,
+    "httpOnly": false,
+    "secure": false
+  },
+  {
+    "name": "_fbp",
+    "value": "fb.1.1649194609346.1674648649",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1656970610,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ym_isad",
+    "value": "2",
+    "domain": ".trendyol.com",
+    "path": "/",
+    "expires": 1649266609,
+    "httpOnly": false,
+    "secure": true
+  }
+]
