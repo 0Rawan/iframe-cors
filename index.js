@@ -74,7 +74,7 @@ app.get('/', function(clientRequest, clientResponse) {
 app.get('/api', (req, res) => {
         res.type('text/html');
         return res.end("You need to specify <code>url</code> query parameter first");
-    }
+    });
 
 
   const port = process.env.PORT || 9000;  
