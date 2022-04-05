@@ -1,15 +1,13 @@
-const cheerio = require('cheerio');
-const express = require('express')
+var express = require('express')
 var app = express()
-const https = require('https');
-const http = require('http');
+var https = require('https');
+var http = require('http');
 const { response } = require('express');
 
 
-app.get('/', function(clientRequest, clientResponse) {
-    console.log(clientRequest.originalUrl)
+app.use('/', function(clientRequest, clientResponse) {
     var url;
-    url = 'https://www.trendyol.com'
+    url = 'https://www.google.com'
     var parsedHost = url.split('/').splice(2).splice(0, 1).join('/')
     var parsedPort;
     var parsedSSL;
@@ -32,7 +30,6 @@ app.get('/', function(clientRequest, clientResponse) {
   
     var serverRequest = parsedSSL.request(options, function(serverResponse) { 
       var body = '';   
-
       if (String(serverResponse.headers['content-type']).indexOf('text/html') !== -1) {
         serverResponse.on('data', function(chunk) {
           body += chunk;
@@ -40,32 +37,22 @@ app.get('/', function(clientRequest, clientResponse) {
   
         serverResponse.on('end', function() {
           // Make changes to HTML files when they're done being read.
-          //console.log(typeof body)
-          //body = body.replace(`example`, `Cat!` );
-          //var substr = body.substring(body.indexOf('<head>'));
-          
-          
-          //manipulate html "body" with cheerio
-          const $ = cheerio.load(body)
-          $('body').prepend('<h1>hello world</h1>');
-          
-          //check if gender popup is active
-          
-         
-          
-          clientResponse.send(body);
+          body = body.replace(`example`, `Cat!` );
+  
+          clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
+          clientResponse.end(body);
         }); 
+      }   
+      else {
+        serverResponse.pipe(clientResponse, {
+          end: true
+        }); 
+        clientResponse.contentType(serverResponse.headers['content-type'])
       }   
     }); 
   
     serverRequest.end();
   });    
-
-app.get('/api', (req, res) => {
-        res.type('text/html');
-        return res.end("You need to specify <code>url</code> query parameter first");
-    });
-
 
   const port = process.env.PORT || 9000;  
   app.listen(port)
