@@ -51,11 +51,7 @@ app.use('/', function(clientRequest, clientResponse) {
           
           //check if gender popup is active
           
-          
-          //console.log($('#gender-popup-app').text())
-          ///if($('body').hasClass('gender-popup-lock'))
-          	//$('body').removeClass('gender-popup-lock').html();
-  
+         
           clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
           
           clientResponse.write('<!doctype html>');
