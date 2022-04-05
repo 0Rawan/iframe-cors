@@ -6,7 +6,7 @@ const http = require('http');
 const { response } = require('express');
 
 
-app.use('/', function(clientRequest, clientResponse) {
+app.get('/', function(clientRequest, clientResponse) {
     console.log(clientRequest.originalUrl)
     var url;
     url = 'https://www.trendyol.com'
