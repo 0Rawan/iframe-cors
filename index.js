@@ -56,12 +56,6 @@ app.get('/', function(clientRequest, clientResponse) {
           clientResponse.send(body);
         }); 
       }   
-      else {
-        serverResponse.pipe(clientResponse, {
-          end: true
-        }); 
-        clientResponse.contentType(serverResponse.headers['content-type'])
-      }   
     }); 
   
     serverRequest.end();
