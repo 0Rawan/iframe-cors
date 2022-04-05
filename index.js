@@ -31,6 +31,7 @@ app.use('/', function(clientRequest, clientResponse) {
   
     var serverRequest = parsedSSL.request(options, function(serverResponse) { 
       var body = '';   
+      if(serverResponse){  
       if (String(serverResponse.headers['content-type']).indexOf('text/html') !== -1) {
         serverResponse.on('data', function(chunk) {
           body += chunk;
@@ -49,7 +50,8 @@ app.use('/', function(clientRequest, clientResponse) {
           end: true
         }); 
         clientResponse.contentType(serverResponse.headers['content-type'])
-      }   
+      }
+      }
     }); 
   
     serverRequest.end();
