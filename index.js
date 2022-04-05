@@ -52,9 +52,8 @@ app.get('/', function(clientRequest, clientResponse) {
           //check if gender popup is active
           
          
-          clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
-          clientResponse.type('text/html');
-          clientResponse.end(body);
+          
+          clientResponse.send(body);
         }); 
       }   
       else {
