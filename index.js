@@ -1,105 +1,81 @@
-const express = require('express');
-const axios = require('axios');
-var cors = require('cors')
-const mime = require('mime');
-const morgan = require('morgan');
-const path = require('path');
-const { URL } = require('url');
+const cheerio = require('cheerio');
+const express = require('express')
+var app = express()
+const https = require('https');
+const http = require('http');
+const { response } = require('express');
 
-const app = express();
-app.use(cors({
-    origin:"*"
-}))
-const port = process.env.PORT || 9000;
 
-let lastProtoHost;
-
-app.use(morgan('tiny'));
-
-const regex = /\s+(href|src)=['"](.*?)['"]/g;
-
-const getMimeType = url => {
-    if (url.indexOf('?') !== -1) { // remove url query so we can have a clean extension
-        url = url.split("?")[0];
+app.use('/', function(clientRequest, clientResponse) {
+    console.log(clientRequest.originalUrl)
+    var url;
+    url = 'https://www.trendyol.com'
+    var parsedHost = url.split('/').splice(2).splice(0, 1).join('/')
+    var parsedPort;
+    var parsedSSL;
+    if (url.startsWith('https://')) {
+        parsedPort = 443
+        parsedSSL = https
+    } else if (url.startsWith('http://')) {
+        parsedPort = 80
+        parsedSSL = http
     }
-    if (mime.getType(url) === 'application/x-msdownload') return 'text/html';
-    return mime.getType(url) || 'text/html'; // if there is no extension return as html
-};
-
-app.get('/api', (req, res) => {
-    const { url } = req.query; // get url parameter
-    if (!url) {
-        console.log(url)
-        res.type('text/html');
-        return res.end("You need to specify <code>url</code> query parameter");
-    }
-    if (!url.includes("trendyol.comjavascript:void(0)")){
-        axios.get(url, { responseType: 'arraybuffer' }) // set response type array buffer to access raw data
-            .then(({ data }) => {
-                const urlMime = getMimeType(url); // get mime type of the requested url
-                if (urlMime === 'text/html') { // replace links only in html
-                    data = data.toString().replace(regex, (match, p1, p2) => {
-                        let newUrl = '';
-                        if (p2.indexOf('http') !== -1) {
-                            newUrl = p2;
-                        } else if (p2.substr(0, 2) === '//') {
-                            newUrl = 'http:' + p2;
-                        } else {
-                            const searchURL = new URL(url);
-                            let protoHost = searchURL.protocol + '//' + searchURL.host;
-                            newUrl = protoHost + p2;
-
-                            if (lastProtoHost != protoHost) {
-                                lastProtoHost = protoHost;
-                                console.log(`Using '${protoHost}' as base for new requests.`);
-                            }
-                        }
-                        return ` ${p1}="${req.protocol}://${req.hostname}:${port}?url=${newUrl}"`;
-                    });
-                }
-                res.type(urlMime);
-                res.send(data);
-            }).catch(error => {
-                console.log(error);
-                res.status(500);
-                res.end("Error")
-            });
-    }
-});
-
-
-app.get('/api/port', (req, res) => {
-   
-        return res.end(port);
-    });
-
-app.get('/api/*', (req, res) => {
-    if (!lastProtoHost) {
-        console.log(url)
-        res.type('text/html');
-        return res.end("You need to specify <code>url</code> query parameter first");
-    }
-
-    const url = lastProtoHost + req.originalUrl;
-    axios.get(url, { responseType: 'arraybuffer' }) // set response type array buffer to access raw data
-        .then(({ data }) => {
-            const urlMime = getMimeType(url); // get mime type of the requested url
-            res.type(urlMime);
-            res.send(data);
-        }).catch(error => {
-            res.status(501);
-            res.end("Not Implemented")
-        });
-});
-
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-
-
-  app.use(express.static(path.join(__dirname, '/frontend/build')))
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, '/frontend/build', 'index.html'))
-  )
-
+    var options = { 
+      hostname: parsedHost,
+      port: parsedPort,
+      path: clientRequest.url,
+      method: clientRequest.method,
+      headers: {
+        'User-Agent': clientRequest.headers['user-agent']
+      }
+    };  
   
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+    var serverRequest = parsedSSL.request(options, function(serverResponse) { 
+      var body = '';   
+
+      if (String(serverResponse.headers['content-type']).indexOf('text/html') !== -1) {
+        serverResponse.on('data', function(chunk) {
+          body += chunk;
+        }); 
+  
+        serverResponse.on('end', function() {
+          // Make changes to HTML files when they're done being read.
+          //console.log(typeof body)
+          //body = body.replace(`example`, `Cat!` );
+          //var substr = body.substring(body.indexOf('<head>'));
+          
+          
+          //manipulate html "body" with cheerio
+          const $ = cheerio.load(body)
+          $('body').prepend('<h1>hello world</h1>');
+          
+          //check if gender popup is active
+          
+          
+          //console.log($('#gender-popup-app').text())
+          ///if($('body').hasClass('gender-popup-lock'))
+          	//$('body').removeClass('gender-popup-lock').html();
+  
+          clientResponse.writeHead(serverResponse.statusCode, serverResponse.headers);
+          
+          clientResponse.write('<!doctype html>');
+          clientResponse.write('<html lang="tr-TR">');
+          clientResponse.write('<h1>Hello, World!</h1>');
+          clientResponse.end(body);
+        }); 
+      }   
+      else {
+        serverResponse.pipe(clientResponse, {
+          end: true
+        }); 
+        clientResponse.contentType(serverResponse.headers['content-type'])
+      }   
+    }); 
+  
+    serverRequest.end();
+  });    
+
+
+  app.listen(3000)
+  console.log('Running on 0.0.0.0:3000')
+
