@@ -34,9 +34,9 @@ app.get('/', async (req, res) => {
 	   for (const cookie of cookies) {
   		await page.setCookie(cookie);
 		}
-            await page.goto(`https://${url}`){
+            await page.goto(`https://${url}` ,{
 	    	waitUntil : 'networkidle2'
-	    }
+	    });
             
             let document = await page.evaluate(() => document.documentElement.outerHTML)
             document = replace(document, `/?url=${url.split('/')[0]}`)
