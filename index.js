@@ -22,7 +22,9 @@ app.get('/', async (req, res) => {
     		args: [
         	'--disable-web-security',
         	'--disable-features=IsolateOrigins',
-        	'--disable-site-isolation-trials'
+        	'--disable-site-isolation-trials',
+		'--disable-setuid-sandbox',
+		'--no-sandbox'	
     		]
 	});
            
@@ -32,7 +34,9 @@ app.get('/', async (req, res) => {
 	   for (const cookie of cookies) {
   		await page.setCookie(cookie);
 		}
-            await page.goto(`https://${url}`)
+            await page.goto(`https://${url}`){
+	    	waitUntil : 'networkidle2'
+	    }
             
             let document = await page.evaluate(() => document.documentElement.outerHTML)
             document = replace(document, `/?url=${url.split('/')[0]}`)
@@ -43,8 +47,14 @@ app.get('/', async (req, res) => {
             
             return res.send(err)
         }
+	    
+	    await browser.close();
+	    return res.send("done")
+	  
     }
 })
 
 
-app.listen(process.env.PORT | 3000)  
+app.listen(process.env.PORT || 3000, (err) => {
+	if(err) throw err;
+})  
